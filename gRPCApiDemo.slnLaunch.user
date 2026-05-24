@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "src\\Demo.gRPCClient\\Demo.gRPCClient.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "src\\Demo.gRPCServer\\Demo.gRPCServer.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="src/Demo.Business/Demo.Business.csproj" />
+  <Project Path="src/Demo.gRPCClient/Demo.gRPCClient.csproj" Id="cdb568cb-46d3-4514-a4c5-10ed7a26e8fb" />
+  <Project Path="src/Demo.gRPCServer/Demo.gRPCServer.csproj" Id="05a6d73a-a526-4eda-8c13-4c61dcf372fc" />
+  <Project Path="src/Demo.Infrastructure.SqlStorage/Demo.Infrastructure.SqlStorage.csproj" />
+</Solution>
