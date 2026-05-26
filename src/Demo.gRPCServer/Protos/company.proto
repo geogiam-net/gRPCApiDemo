@@ -1,0 +1,43 @@
+
+syntax = "proto3";
+
+option csharp_namespace = "Demo.gRPCServer";
+
+package company;
+
+import "google/protobuf/timestamp.proto";
+
+service ProtoCompany {
+
+	rpc GetCompanyData (GetCompanyDataRequest) returns (GetCompanyDataResponse);
+
+	rpc UpdateCompanyFinancials (UpdateCompanyFinancialsRequest) returns (UpdateCompanyFinancialsResponse);
+}
+
+message GetCompanyDataRequest {
+	string legalName = 1;
+}
+
+message GetCompanyDataResponse {
+	Company company = 1;
+}
+
+message UpdateCompanyFinancialsRequest {
+	string legalName = 1;
+	double newEarnings = 2;
+	double newRevenue = 3;
+}
+
+message UpdateCompanyFinancialsResponse {
+	Company company = 1;
+}
+
+// ------ definitions and data objects ------
+
+message Company {
+	string id = 1;
+	string legalName = 2;
+	google.protobuf.Timestamp creationDate = 3;
+	double earningsLastYear = 4;
+	double revenueLastYear = 5;
+}

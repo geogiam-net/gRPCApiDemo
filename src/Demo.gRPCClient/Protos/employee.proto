@@ -1,0 +1,64 @@
+
+syntax = "proto3";
+
+option csharp_namespace = "Demo.gRPCClient";
+
+package employee;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+service ProtoEmployee {
+
+	rpc GetEmployeeById (GetEmployeeByIdRequest) returns (GetEmployeeByIdResponse);
+
+	rpc GetEmployees (GetEmployeesRequest) returns (GetEmployeesResponse);
+
+	rpc CreateEmployee (CreateEmployeeRequest) returns (CreateEmployeeResponse);
+}
+
+message GetEmployeeByIdRequest {
+	// Use string for GUID
+	string id = 1;
+}
+
+message GetEmployeeByIdResponse {
+	Employee employee = 1;
+}
+
+message GetEmployeesRequest {
+	google.protobuf.Int32Value pageSize = 1;
+	google.protobuf.Int32Value pageNum = 2;
+}
+
+message GetEmployeesResponse {
+	repeated Employee employees = 1;
+}
+
+message CreateEmployeeRequest {
+	string name =1;
+	string lastname = 2;
+}
+
+message CreateEmployeeResponse {
+	Employee Employee = 1;
+}
+
+// ------ definitions and data objects ------
+
+enum Role {
+	ROLE_NONE = 0;
+	ROLE_MANAGEMENT = 1;
+	ROLE_OPERATIONS = 2;
+}
+
+message Employee {
+	string id = 1;
+	string documentId = 2;
+	string name = 3;
+	string lastname = 4;
+	double salary = 5;
+	google.protobuf.Timestamp birthDate = 6;
+	Role role = 7;
+	string companyId = 8;
+}

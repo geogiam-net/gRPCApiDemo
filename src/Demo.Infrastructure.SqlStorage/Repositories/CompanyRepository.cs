@@ -17,7 +17,7 @@ public class CompanyRepository(ApplicationDbContext dbContext) : ICompanyReposit
             .FirstOrDefaultAsync(x => string.Equals(x.LegalName, legalName, StringComparison.OrdinalIgnoreCase), cancellationToken);
     }
 
-    public async Task<Company?> UpdatePastYearCompanyEarningsAndRevenueAsync(string legalName, decimal newEarnings, decimal newRevenue, CancellationToken cancellationToken = default)
+    public async Task<Company?> UpdateCompanyFinancialsAsync(string legalName, decimal newEarnings, decimal newRevenue, CancellationToken cancellationToken = default)
     {
         var company = await dbContext.Companies
             .FirstOrDefaultAsync(x => string.Equals(x.LegalName, legalName, StringComparison.OrdinalIgnoreCase), cancellationToken);
