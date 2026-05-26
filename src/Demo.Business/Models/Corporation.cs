@@ -10,6 +10,4 @@ public class Corporation
 
     public List<Company> Companies { get; set; } = new List<Company>();
 
-    public List<Locations> Locations { get; set; } = new List<Locations>();
-
 }

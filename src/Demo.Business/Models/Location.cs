@@ -1,13 +1,13 @@
 ﻿namespace Demo.Business.Models;
 
-public class Locations
+public class Location
 {
-    public Locations() { }
+    public Location() { }
 
     public Guid Id { get; set; } = default;
 
-    public Guid CorporationId { get; set; } = default;
-    public Corporation? Corporation { get; set; }
+    public Guid CompanyId { get; set; } = default;
+    public Company? Company { get; set; }
 
     public string Number { get; set; } = string.Empty;
 

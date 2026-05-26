@@ -19,4 +19,6 @@ public class Company
 
     public List<Employee> Employees { get; set; } = new List<Employee>();
 
+    public List<Location> Locations { get; set; } = new List<Location>();
+
 }

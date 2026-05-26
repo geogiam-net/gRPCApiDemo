@@ -7,11 +7,6 @@ namespace Demo.Business.Services;
 
 public class EmployeeService(IEmployeeRepository employeeRepository) : IEmployeeService
 {
-    public async Task<IEnumerable<Employee>> GetEmployeesAsync(int pageSize = 0, int pageNum = 0, CancellationToken cancellationToken = default)
-    {
-        return await employeeRepository.GetEmployeesAsync(pageSize, pageNum, cancellationToken);
-    }
-
     public async Task<Employee> CreateEmployeeAsync(string name, string lastname, CancellationToken cancellationToken = default)
     {
         var newEmployee = new Employee(name, lastname);
@@ -29,5 +24,15 @@ public class EmployeeService(IEmployeeRepository employeeRepository) : IEmployee
         }
 
         return await employeeRepository.CreateEmployeeAsync(newEmployee, cancellationToken);
+    }
+
+    public async Task<Employee?> GetEmployeeAsync(Guid id, CancellationToken cancellationToken = default)
+    {
+        return await employeeRepository.GetEmployeeAsync(id, cancellationToken);
+    }
+
+    public async Task<IEnumerable<Employee>> GetEmployeesAsync(int pageSize = 0, int pageNum = 0, CancellationToken cancellationToken = default)
+    {
+        return await employeeRepository.GetEmployeesAsync(pageSize, pageNum, cancellationToken);
     }
 }

@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using Demo.Business.Models;
-using System.Linq;
 
 namespace Demo.Infrastructure.SqlStorage.Data;
 
@@ -9,7 +8,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     public const string DbSchema = "DemoApp";
     public DbSet<Corporation> Corporations => Set<Corporation>();
     public DbSet<Company> Companies => Set<Company>();
-    public DbSet<Locations> Locations => Set<Locations>();
+    public DbSet<Location> Locations => Set<Location>();
     public DbSet<Employee> Employees => Set<Employee>();
 
     // in memory database won't call this method
@@ -22,16 +21,17 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
         {
             b.HasKey(c => c.Id);
             b.HasMany(c => c.Companies).WithOne(cmp => cmp.Corporation).HasForeignKey(cmp => cmp.CorporationId);
-            b.HasMany(c => c.Locations).WithOne(l => l.Corporation).HasForeignKey(l => l.CorporationId);
+
         });
 
         modelBuilder.Entity<Company>(b =>
         {
             b.HasKey(c => c.Id);
             b.HasMany(c => c.Employees).WithOne(e => e.Company).HasForeignKey(e => e.CompanyId);
+            b.HasMany(c => c.Locations).WithOne(l => l.Company).HasForeignKey(l => l.CompanyId);
         });
 
-        modelBuilder.Entity<Locations>(b =>
+        modelBuilder.Entity<Location>(b =>
         {
             b.HasKey(l => l.Id);
         });
@@ -82,9 +82,9 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
 
         var locations = new[]
         {
-            new Locations { Id = location1Id, Number = "1", Street = "Main St", City = "Metropolis", ZipCode = "10001", IsHeadquarters = true, IsLeased = false, CorporationId = corp1Id },
-            new Locations { Id = location2Id, Number = "10", Street = "2nd Ave", City = "Gotham", ZipCode = "20002", IsHeadquarters = false, IsLeased = true, CorporationId = corp1Id },
-            new Locations { Id = location3Id, Number = "5", Street = "Commerce Blvd", City = "Springfield", ZipCode = "30003", IsHeadquarters = true, IsLeased = false, CorporationId = corp2Id }
+            new Location { Id = location1Id, Number = "1", Street = "Main St", City = "Metropolis", ZipCode = "10001", IsHeadquarters = true, IsLeased = false, CompanyId = company1Id },
+            new Location { Id = location2Id, Number = "10", Street = "2nd Ave", City = "Gotham", ZipCode = "20002", IsHeadquarters = false, IsLeased = true, CompanyId = company1Id },
+            new Location { Id = location3Id, Number = "5", Street = "Commerce Blvd", City = "Springfield", ZipCode = "30003", IsHeadquarters = true, IsLeased = false, CompanyId = company3Id }
         };
 
         var employees = new[]
